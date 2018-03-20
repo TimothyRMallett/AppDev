@@ -11,8 +11,8 @@ export class TutorialPage {
 
 	@ViewChild('canvas') canvasEl: ElementRef;
 
-	private _CANVAS: any;
-	private _CONTEXT: any;
+	private canvas: any;
+	private c: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -21,31 +21,46 @@ export class TutorialPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TutorialPage');
 
-    this._CANVAS = this.canvasEl.nativeElement;
-    this._CANVAS.width = 200;
-    this._CANVAS.height = 200;
+    this.canvas = this.canvasEl.nativeElement;
+    this.canvas.width = 320;
+    this.canvas.height = 200;
 
 
     this.initialiseCanvas();
-    //this.drawCircle();
+    //this.drawStaffLine(10);
+    this.drawTrebleClef();
+    this.drawBassClef();
 
   }
 
-  initialiseCanvas() : void
-   {
-      if(this._CANVAS.getContext)
+  initialiseCanvas() : void{
+      if(this.canvas.getContext)
       {
          this.setupCanvas();
       }
    }
 
-   setupCanvas() : void
-   {
-      this._CONTEXT = this._CANVAS.getContext('2d');
-      this._CONTEXT.fillStyle = "#3e3e3e";
-      this._CONTEXT.fillRect(0, 0, 500, 500);
+   setupCanvas() : void{
+      this.c = this.canvas.getContext('2d');
+      this.c.fillStyle = "#ffffff";
+      this.c.fillRect(0, 0, 800, 500);
    }
 
+   drawStaffLine(linePos: number) : void{
+     this.c.fillStyle = "#000000"
+     this.c.fillRect(0, linePos, this.canvas.width, 2);
+   }
 
+   drawTrebleClef(){
+     for (var i = 2; i < 7; i++) {
+       this.drawStaffLine(i * 9);
+     }
+   }
+
+   drawBassClef(){
+     for (var i = 9; i < 14; i++) {
+       this.drawStaffLine(i * 9);
+     }
+   }
 
 }
