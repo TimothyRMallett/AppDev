@@ -10,17 +10,14 @@
 
 <ion-content padding>
   <h3>Tutorial</h3>
-
-  
-  <div class="grandStaffDiv">
-    <!--<canvas class="grandStaffCanvas">
-      
-    </canvas>-->
     
     <canvas #canvas class="grandStaffCanvas">
-      <img id="trebleclef" src="https://d30y9cdsu7xlg0.cloudfront.net/png/923017-200.png">
+      
     </canvas>
-  </div>
+    <BUTTON ion-button (click)="drawNewNote('f')">F</BUTTON>
+    <BUTTON ion-button (click)="drawNewNote('a')">A</BUTTON>
+    <BUTTON ion-button (click)="drawNewNote('c')">C</BUTTON>  
+    <BUTTON ion-button (click)="drawNewNote('e')">E</BUTTON>
 
   <!--
   <button ion-button secondary menuToggle>Toggle Menu</button>

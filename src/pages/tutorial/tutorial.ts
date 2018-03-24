@@ -13,9 +13,10 @@ export class TutorialPage {
 
 	private canvas: any;
 	private c: any;
-  private trebleCleffImg = new Image();
-  private bassCleffImg = new Image();
-  private quarterNoteImg= new Image();
+	private lastLetterDrawn: string;
+  	private trebleCleffImg = new Image();
+ 	private bassCleffImg = new Image();
+  	private quarterNoteImg= new Image();
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.trebleCleffImg.src = "https://d30y9cdsu7xlg0.cloudfront.net/png/923017-200.png";
@@ -25,28 +26,25 @@ export class TutorialPage {
 
   }
 
-
   ionViewDidLoad(){
     console.log('ionViewDidLoad TutorialPage');
 
     this.canvas = this.canvasEl.nativeElement;
     this.canvas.width = 320;
-    this.canvas.height = 450;
+    this.canvas.height = 200;
 
 
     this.initialiseCanvas();
     this.drawGrandStaff();
-    this.drawQuarterNote("t","f");
-    this.drawQuarterNote("t","a");
-    this.drawQuarterNote("t","c");
-    this.drawQuarterNote("t","e");
-    //this.trebleCleffImg.onload = this.c.drawImage(this.trebleCleffImg, 0, 17, 80, 80};
+    this.drawRandomNote();
   }
 
   initialiseCanvas() : void{
-      if(this.canvas.getContext)
-      {
+      if(this.canvas.getContext){
          this.setupCanvas();
+      }
+      else{
+      	//error message for no browser support
       }
    }
 
@@ -63,14 +61,14 @@ export class TutorialPage {
 
    drawTrebleClef(){
      for (var i = 2; i < 7; i++) {
-       this.drawStaffLine(i * 13);
+       this.drawStaffLine(i * 14);
      }
      this.c.drawImage(this.trebleCleffImg, 0, 17, 80, 80);
    }
 
    drawBassClef(){
      for (var i = 9; i < 14; i++) {
-       this.drawStaffLine(i * 13);
+       this.drawStaffLine(i * 14);
      }
      this.c.drawImage(this.bassCleffImg,18,119,39,39);
    }
@@ -80,25 +78,77 @@ export class TutorialPage {
      this.drawBassClef();
    }
 
-   drawQuarterNote(clef: string, note:string){
+   drawQuarterNote(note:string){
+
+   }
+
+   drawNote(clef: string, note:string){
      if (clef.localeCompare("t") == 0) {
-       console.log("jsdjls");
-       if (note.localeCompare("f")) {
+       if (note.localeCompare("f") == 0) {
          this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 30, 50, 50);
        }
-       if(note.localeCompare("a")){
+       else if(note.localeCompare("a") == 0){
          this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 17, 50, 50);
-         console.log("blarg");
        }
-       if(note.localeCompare("c")){
+       else if(note.localeCompare("c") == 0){
          this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 4, 50, 50);
-         console.log("far out");
        }
-       if(note.localeCompare("e")){
+       else if(note.localeCompare("e") == 0){
          this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, -9, 50, 50);
        }
+     else if(note.localeCompare("g") == 0){
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 23, 50, 50);
      }
-     
+     else if(note.localeCompare("b") == 0){
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 10, 50, 50);
+     }
+     else if(note.localeCompare("d") == 0){
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, -9, 50, 50);
+     }
+ 	}
+ 	else if(clef.localeCompare("ot") == 0){
+
+ 	}	
+   }
+
+   clearCanvas(){
+   	this.c.closePath();
+   	this.c.beginPath();
+   	this.canvas.width = this.canvas.width;
+   }
+
+   redrawCanvas(){
+   	this.clearCanvas();
+   	this.setupCanvas();
+   	this.drawGrandStaff();
+   }
+
+   drawRandomNote(){
+   	var num = Math.floor((Math.random() * 4) + 1);
+   	console.log(num);
+   	if(num == 1){ 		
+   		this.drawNote("t", "f");
+   		this.lastLetterDrawn = "f";
+   	}
+   	else if(num == 2){
+   		this.drawNote("t", "a");
+   		this.lastLetterDrawn = "a";
+   	}
+   	else if(num == 3){
+   		this.drawNote("t", "c");
+   		this.lastLetterDrawn = "c";
+   	}
+   	else if(num == 4){
+   		this.drawNote("t", "e");
+   		this.lastLetterDrawn = "e";
+   	}
+   }
+
+   drawNewNote(letter:string){
+   	if (letter.localeCompare(this.lastLetterDrawn) == 0) {
+   		this.redrawCanvas();
+   		this.drawRandomNote();
+   	}
    }
 
    ////////All Currently Unused Funcitons/////////
