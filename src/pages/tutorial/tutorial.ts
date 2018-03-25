@@ -13,6 +13,7 @@ export class TutorialPage {
 
 	private canvas: any;
 	private c: any;
+	private lineWidth = 14;
 	private lastLetterDrawn: string;
   	private trebleCleffImg = new Image();
  	private bassCleffImg = new Image();
@@ -36,7 +37,8 @@ export class TutorialPage {
 
     this.initialiseCanvas();
     this.drawGrandStaff();
-    this.drawRandomNote();
+    //this.drawRandomNote();
+    this.drawNote("t","f");
   }
 
   initialiseCanvas() : void{
@@ -61,16 +63,16 @@ export class TutorialPage {
 
    drawTrebleClef(){
      for (var i = 2; i < 7; i++) {
-       this.drawStaffLine(i * 14);
+       this.drawStaffLine(i * this.lineWidth);
      }
-     this.c.drawImage(this.trebleCleffImg, 0, 17, 80, 80);
+     this.c.drawImage(this.trebleCleffImg, 0, 19, 85, 85);
    }
 
    drawBassClef(){
      for (var i = 9; i < 14; i++) {
-       this.drawStaffLine(i * 14);
+       this.drawStaffLine(i * this.lineWidth);
      }
-     this.c.drawImage(this.bassCleffImg,18,119,39,39);
+     this.c.drawImage(this.bassCleffImg,18,127,43,43);
    }
 
    drawGrandStaff(){
@@ -85,16 +87,16 @@ export class TutorialPage {
    drawNote(clef: string, note:string){
      if (clef.localeCompare("t") == 0) {
        if (note.localeCompare("f") == 0) {
-         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 30, 50, 50);
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 36, 50, 50);
        }
        else if(note.localeCompare("a") == 0){
-         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 17, 50, 50);
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 22, 50, 50);
        }
        else if(note.localeCompare("c") == 0){
-         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 4, 50, 50);
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 8, 50, 50);
        }
        else if(note.localeCompare("e") == 0){
-         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, -9, 50, 50);
+         this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, -6, 50, 50);
        }
      else if(note.localeCompare("g") == 0){
          this.c.drawImage(this.quarterNoteImg, this.canvas.width/2 - 15, 23, 50, 50);
