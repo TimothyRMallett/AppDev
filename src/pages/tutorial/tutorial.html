@@ -14,10 +14,13 @@
     <canvas #canvas class="grandStaffCanvas">
       
     </canvas>
-    <BUTTON ion-button (click)="drawNewNote('f')">F</BUTTON>
-    <BUTTON ion-button (click)="drawNewNote('a')">A</BUTTON>
-    <BUTTON ion-button (click)="drawNewNote('c')">C</BUTTON>  
-    <BUTTON ion-button (click)="drawNewNote('e')">E</BUTTON>
+    <BUTTON ion-button (click)="drawNewTrebleNote(0)">A</BUTTON>
+    <BUTTON ion-button (click)="drawNewTrebleNote(1)">B</BUTTON>
+    <BUTTON ion-button (click)="drawNewTrebleNote(2)">C</BUTTON>
+    <BUTTON ion-button (click)="drawNewTrebleNote(3)">D</BUTTON>
+    <BUTTON ion-button (click)="drawNewTrebleNote(4)">E</BUTTON>
+    <BUTTON ion-button (click)="drawNewTrebleNote(5)">F</BUTTON>  
+    <BUTTON ion-button (click)="drawNewTrebleNote(6)">G</BUTTON>
 
   <!--
   <button ion-button secondary menuToggle>Toggle Menu</button>
