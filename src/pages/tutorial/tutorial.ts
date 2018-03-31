@@ -1,5 +1,9 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PianoDrawProvider } from '../../providers/piano-draw/piano-draw';
+const htmlCanvas = document.createElement("canvas");
+htmlCanvas.height = 200;
+htmlCanvas.width = 320;
 
 
 @IonicPage()
@@ -10,21 +14,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TutorialPage {
 
 	@ViewChild('canvas') canvasEl: ElementRef;
-
+/*
+@ViewChild('canvas') canvasEl: ElementRef;
 	private canvas: any;
 	private c: any;
-	private lineWidth = 14; //if this is edited, the staff wont neccesarilly draw properly without editing for loops
+	private lineWidth = 14; //if this is edited, the staff wont neccesarilly draw properly without editing for-loops
 	private staffPos = 3; //edit this to change the vertical pos of the staff
 	private lastLetterDrawn: number[];
 	private notePos:number[][];//stores info of where to draw each note
 	private treble = 0; private bass = 1; private outertreb = 2; private outerbass = 3; //pos in notePos array 1st dimension
 	//private anote = 0; private bnote = 1; private cnote = 2; private dnote = 3; private enote = 4; private fnote = 5; private gnote = 6;
 
-  	private trebleCleffImg = new Image();
+  private trebleCleffImg = new Image();
  	private bassCleffImg = new Image();
-  	private quarterNoteImg= new Image();
+  private quarterNoteImg= new Image();
+*/
+  //public drawer; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public drawer: PianoDrawProvider) {
+    //drawer = new PianoDrawProvider(htmlCanvas);
+
+
+    /*
     this.trebleCleffImg.src = "https://d30y9cdsu7xlg0.cloudfront.net/png/923017-200.png";
     this.bassCleffImg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/FClef.svg/691px-FClef.svg.png";
     this.quarterNoteImg.src = "https://images.vexels.com/media/users/3/143592/isolated/preview/87a7de8e3d9f7b1760a9f5453b72b55c-quarter-note-isolated-by-vexels.png";
@@ -32,25 +43,28 @@ export class TutorialPage {
     this.notePos = [[-6,-14,-20,-28,-34,8,0],[106, 98, 92, 84, 78, 70, 64],[15,-42],[]];
     this.lastLetterDrawn = [9,9,9,9];
 
+
     //initialise string array, first dimension "t", "ot", "b", and "ob". Second contains the note e.g. a, f or c. Third contains the draw info
     //this.notePos[this.treble][this.anote][0] = -6;
     //console.log(this.notePos[this.treble][this.anote][0]);
-
+*/
   }
 
   ionViewDidLoad(){
     console.log('ionViewDidLoad TutorialPage');
-
+/*
     this.canvas = this.canvasEl.nativeElement;
     this.canvas.width = 320;
     this.canvas.height = 200;
+    */
 
 
-    this.initialiseCanvas();
-    this.drawGrandStaff();
-    this.drawRandomNote(0);
+    //this.drawServ.initialiseCanvas();
+    //this.drawServ.drawGrandStaff();
+    //this.drawServ.drawRandomNote(0);
     //this.drawQuarterNote(0,5);
   }
+  /*
 //checks for canvas browser support before setting up canvas
   initialiseCanvas() : void{
       if(this.canvas.getContext){
@@ -145,7 +159,7 @@ export class TutorialPage {
    	return 0;
    }
    //add drawNewBassNote and drawNewNote, potentially drawNewOuterNote
-
+*/
 }
 ////////All Currently Unused Funcitons/////////
 
