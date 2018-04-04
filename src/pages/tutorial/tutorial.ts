@@ -1,9 +1,6 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PianoDrawProvider } from '../../providers/piano-draw/piano-draw';
-const htmlCanvas = document.createElement("canvas");
-htmlCanvas.height = 200;
-htmlCanvas.width = 320;
 
 
 @IonicPage()
@@ -13,10 +10,12 @@ htmlCanvas.width = 320;
 })
 export class TutorialPage {
 
-	@ViewChild('canvas') canvasEl: ElementRef;
+	//@ViewChild('canvas') canvasEl: ElementRef;
+  //private canvas: any;
+  
 /*
 @ViewChild('canvas') canvasEl: ElementRef;
-	private canvas: any;
+	
 	private c: any;
 	private lineWidth = 14; //if this is edited, the staff wont neccesarilly draw properly without editing for-loops
 	private staffPos = 3; //edit this to change the vertical pos of the staff
@@ -31,9 +30,10 @@ export class TutorialPage {
 */
   //public drawer; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public drawer: PianoDrawProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public drawServ: PianoDrawProvider) {
     //drawer = new PianoDrawProvider(htmlCanvas);
 
+    //this.canvas = this.drawServ.retCanvasElement();
 
     /*
     this.trebleCleffImg.src = "https://d30y9cdsu7xlg0.cloudfront.net/png/923017-200.png";
@@ -58,11 +58,13 @@ export class TutorialPage {
     this.canvas.height = 200;
     */
 
+    //this.drawServ.giveCanvasElement(this.canvas);
+    this.canvasParentDiv.insertBefore(this.drawServ.retCanvasElement(), this.canvasDiv);
+    this.drawServ.initialiseCanvas();
+    this.drawServ.drawGrandStaff();
+    this.drawServ.drawRandomNote(0);
+    this.drawServ.drawQuarterNote(0,5);
 
-    //this.drawServ.initialiseCanvas();
-    //this.drawServ.drawGrandStaff();
-    //this.drawServ.drawRandomNote(0);
-    //this.drawQuarterNote(0,5);
   }
   /*
 //checks for canvas browser support before setting up canvas

@@ -10,6 +10,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { PianoDrawProvider } from '../providers/piano-draw/piano-draw';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PianoDrawProvider
   ]
 })
 export class AppModule {}
