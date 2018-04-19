@@ -5,46 +5,49 @@ import { PianoDrawProvider } from '../../providers/piano-draw/piano-draw';
 
 @IonicPage()
 @Component({
-  selector: 'page-tutorial',
-  templateUrl: 'tutorial.html',
+  selector: 'page-grand-staff',
+  templateUrl: 'grand-staff.html',
 })
-export class TutorialPage {
+export class GrandStaffPage {
 
-	@ViewChild('canvas') canvasElement: ElementRef;
+  @ViewChild('canvas') canvasElement: ElementRef;
   private ctx: any;
-  
+  private clef: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public drawServ: PianoDrawProvider) {
 
   }
 
-  ionViewDidLoad(){
-    console.log('ionViewDidLoad TutorialPage');
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad BassPage');
 
+    this.clef = Math.floor(Math.random() * 2);
     this.drawServ.outerPos = false;//without this the toggle will be incorrect when page is changed
-    this.canvasElement.nativeElement.width = 320;
+  	this.canvasElement.nativeElement.width = 320;
     this.canvasElement.nativeElement.height = 260;
     this.ctx = this.canvasElement.nativeElement.getContext('2d');
     this.drawServ.clearCanvas();
     //this.ctx.drawImage(this.drawServ.canvas, 0, 0);
     //this.drawServ.clearCanvas();
     this.drawServ.drawGrandStaff();
-    this.drawServ.drawRandomNote(0);
+    this.drawServ.drawRandomNote(this.clef);
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
-    //this.drawAfterImageLoads();
-    //this.drawServ.initialiseCanvas();
-    //this.drawServ.drawGrandStaff();
-    //this.drawServ.drawRandomNote(0);
-    //this.drawServ.drawQuarterNote(0,5);
 
   }
 
-  drawRandIfCorrect(letter:number){//same as others, this page will be tutorial but is for testing at the moment
+  drawRandIfCorrect(letter:number){//draws new random note on bass clef
     this.canvasElement.nativeElement.width = 320;
-    this.drawServ.drawNewTrebleNote(letter);
+    this.clef = Math.floor(Math.random() * 2); 
+    if(this.clef == 0){
+    	this.drawServ.drawNewTrebleNote(letter);
+    }
+    else if(this.clef = 1){
+    	this.drawServ.drawNewBassNote(letter);
+	}
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
   }
-  toggleOuterNotes(){ //same as others
+
+  toggleOuterNotes(){//toggles the outerNotes boolean to allow for the notes outside the staff to be seen
     if(this.drawServ.outerPos){
       this.drawServ.outerPos = false;
     }
@@ -54,16 +57,8 @@ export class TutorialPage {
     console.log(this.drawServ.outerPos);
   }
 
-  popPage(){ //same as others
+  popPage(){ //pops the page back to home
     this.navCtrl.pop();
   }
-
-  /*currently unused
-  drawAfterImageLoads(){
-    while(this.drawServ.imgLoadedCount < this.drawServ.imgCount){
-      console.log("woooork");
-    }
-    this.ctx.drawImage(this.drawServ.canvas, 0, 0);
-  }*/
 
 }

@@ -7,16 +7,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Sheet Music Mastered</h3>
+<ion-content padding class="backgroundDiv">
+  <h3 class="heading">Sheet Music Mastered</h3>
 
-  <p>Learn to read sheet music FAST!</p>
-
+  <p class="sub-Heading">Learn to read sheet music FAST!</p>
+<!--
   <button ion-button secondary menuToggle>Toggle Menu</button>
+-->
+<div class="buttonDiv">
 
-  <p>Click the button below to go to the tutorial, or if you have used this app before, use the menu to select the difficulty</p>
+  <button ion-button color="pianoButtonColor" block (click)="pushPage('Tutorial')">Tutorial</button>
+  <button ion-button color="pianoButtonColor" block (click)="pushPage('Treble')">Treble Clef</button>
+  <button ion-button color="pianoButtonColor" block (click)="pushPage('Bass')">Bass Clef</button>
+  <button ion-button color="pianoButtonColor" block (click)="pushPage('Grand')">Grand Staff</button>
+  <button ion-button color="pianoButtonColor" block (click)="pushPage('Time')">Time Trial</button>
+  <button ion-button color="pianoButtonColor" block (click)="pushPage('Stats')">Stats</button>
+  
+</div>
 
-  <!-- Add button to go to tutorial here-->
+
 
   
 

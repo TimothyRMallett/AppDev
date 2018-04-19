@@ -1,0 +1,9 @@
+'https://d30y9cdsu7xlg0.cloudfront.net/png/923017-200.png'
+                    
+                    ,'https://images.vexels.com/media/users/3/143592/isolated/preview/87a7de8e3d9f7b1760a9f5453b72b55c-quarter-note-isolated-by-vexels.png'
+                    
+
+                      private pianoImages = ['../../assets/imgs/treble-clef.png'
+                    ,'../../assets/imgs/bass-clef.png'
+                    ,'../../assets/imgs/quarter-note.png'
+                    ];

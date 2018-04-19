@@ -3,15 +3,13 @@
   	<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Tutorial</ion-title>
+    <ion-title>Time Trial</ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <h3>Tutorial</h3>
-    
-    <canvas #canvas class="grandStaffCanvas">
+
+ <canvas #canvas class="grandStaffCanvas">
     </canvas>
 
     <BUTTON ion-button (click)="drawRandIfCorrect(0)">A</BUTTON>
@@ -22,10 +20,6 @@
     <BUTTON ion-button (click)="drawRandIfCorrect(5)">F</BUTTON>  
     <BUTTON ion-button (click)="drawRandIfCorrect(6)">G</BUTTON>
 
-    <ion-item>
-    <ion-label>Include Outer Notes</ion-label>
-    <ion-checkbox [(ngModel)]="outerNotes" (ionChange)="toggleOuterNotes()"></ion-checkbox>
-    </ion-item>
 
     <button ion-button color="pianoButtonColor" block (click)="popPage()">Back To Home</button>
 
