@@ -1,0 +1,24 @@
+<!--
+  Generated template for the WelcomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>welcome</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<h2> Welcome to Sheet Music Mastered!</h2>
+	<p>Input Your Username here so you can track your progress</p>
+	<ion-item>
+		<ion-input type="text"[(ngModel)]="inputName" placeholder="Username"></ion-input>
+	</ion-item>
+
+    <button ion-button color="pianoButtonColor" block (click)="submitUserName()">Submit</button>
+</ion-content>

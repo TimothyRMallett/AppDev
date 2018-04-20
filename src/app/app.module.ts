@@ -10,6 +10,7 @@ import { BassPage } from '../pages/bass/bass';
 import { GrandStaffPage } from '../pages/grand-staff/grand-staff';
 import { TimeTrialPage } from '../pages/time-trial/time-trial';
 import { StatsPage } from '../pages/stats/stats';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +26,8 @@ import { ChartsModule } from 'ng2-charts';
     BassPage,
     GrandStaffPage,
     TimeTrialPage,
-    StatsPage
+    StatsPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { ChartsModule } from 'ng2-charts';
     BassPage,
     GrandStaffPage,
     TimeTrialPage,
-    StatsPage
+    StatsPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,

@@ -10,6 +10,7 @@ import { BassPage } from '../pages/bass/bass';
 import { GrandStaffPage } from '../pages/grand-staff/grand-staff';
 import { TimeTrialPage } from '../pages/time-trial/time-trial';
 import { StatsPage } from '../pages/stats/stats';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class MyApp {
       { title: 'Bass', component: BassPage},
       { title: 'Grand Staff', component: GrandStaffPage},
       { title: 'Time Trial', component: TimeTrialPage},
-      { title: 'Stats', component: StatsPage}
+      { title: 'Stats', component: StatsPage},
+      { title: 'Welcome', component: WelcomePage}
 
     ];
 
