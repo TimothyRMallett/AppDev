@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ModalController, NavParams } from 'ionic-angular';
+import { PianoDrawProvider } from '../../providers/piano-draw/piano-draw';
+
 
 import { TutorialPage } from '../tutorial/tutorial';
 import { TreblePage } from '../treble/treble';
@@ -16,20 +18,23 @@ import { WelcomePage } from '../welcome/welcome';
 })
 export class HomePage {
 
-	private trebleClefImg = new Image(); private bassClefImg = new Image(); private quarterNoteImg = new Image();
+	//private trebleClefImg = new Image(); private bassClefImg = new Image(); private quarterNoteImg = new Image();
 	public userName: string;
+	@ViewChild('canvas') canvasElement: ElementRef;
+  	private ctx: any;
 
-  	constructor(public navCtrl: NavController, public modCtrl: ModalController, public navParams: NavParams) {
-  		this.showUserModal();
+  	constructor(public navCtrl: NavController, public modCtrl: ModalController, public navParams: NavParams, public drawServ: PianoDrawProvider) {
+  		//this.showUserModal();
   		//this.userName = navParams.get('userName');
-	  	this.trebleClefImg.src = '../../assets/imgs/treble-clef.png'; 
-	  	this.bassClefImg.src = '../../assets/imgs/bass-clef.png';
-	  	this.quarterNoteImg.src = '../../assets/imgs/quarter-note.png';
+	  	//this.trebleClefImg.src = '../../assets/imgs/treble-clef.png'; 
+	  	//this.bassClefImg.src = '../../assets/imgs/bass-clef.png';
+	  	//this.quarterNoteImg.src = '../../assets/imgs/quarter-note.png';
   	}
 
   	ionViewDidLoad(){
   		
   		console.log(this.userName);
+  		this.drawServ.drawImagesForPreLoad();
   	}
 
 	pushPage(page:string){ //pushes the page that the user selects

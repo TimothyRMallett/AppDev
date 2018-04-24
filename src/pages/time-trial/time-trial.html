@@ -9,18 +9,33 @@
 
 <ion-content padding>
 
- <canvas #canvas class="grandStaffCanvas">
-    </canvas>
+  <div class="timerDiv">
+    
+    <div class="timerText">{{timeLeft}}</div>
+    
+  </div>
+  <div class="timerDiv">
+    <div class="correctNotes">Correct:{{correctClicks}}</div>
+    <div class="incorrectNotes">Incorrect:{{incorrectClicks}}</div>
+  </div>
 
-    <BUTTON ion-button (click)="drawRandIfCorrect(0)">A</BUTTON>
-    <BUTTON ion-button (click)="drawRandIfCorrect(1)">B</BUTTON>
-    <BUTTON ion-button (click)="drawRandIfCorrect(2)">C</BUTTON>
-    <BUTTON ion-button (click)="drawRandIfCorrect(3)">D</BUTTON>
-    <BUTTON ion-button (click)="drawRandIfCorrect(4)">E</BUTTON>
-    <BUTTON ion-button (click)="drawRandIfCorrect(5)">F</BUTTON>  
-    <BUTTON ion-button (click)="drawRandIfCorrect(6)">G</BUTTON>
+
+  <canvas #canvas class="grandStaffCanvas">
+  </canvas>
+
+  <div>
+    <BUTTON ion-button (click)="start()">Start</BUTTON>
+  </div>
 
 
-    <button ion-button color="pianoButtonColor" block (click)="popPage()">Back To Home</button>
+  <BUTTON ion-button (click)="drawRandIfCorrect(0)">A</BUTTON>
+  <BUTTON ion-button (click)="drawRandIfCorrect(1)">B</BUTTON>
+  <BUTTON ion-button (click)="drawRandIfCorrect(2)">C</BUTTON>
+  <BUTTON ion-button (click)="drawRandIfCorrect(3)">D</BUTTON>
+  <BUTTON ion-button (click)="drawRandIfCorrect(4)">E</BUTTON>
+  <BUTTON ion-button (click)="drawRandIfCorrect(5)">F</BUTTON>  
+  <BUTTON ion-button (click)="drawRandIfCorrect(6)">G</BUTTON>
+
+  <button ion-button color="pianoButtonColor" block (click)="popPage()">Back To Home</button>
 
 </ion-content>

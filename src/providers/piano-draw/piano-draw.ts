@@ -175,6 +175,12 @@ export class PianoDrawProvider {
      }
      return 0;
    }
+   //draws images on canvas on home pages because they dont show up anyway and it makes sure they load before going to one of the other pages
+   drawImagesForPreLoad(){
+     this.ctx.drawImage(this.loadedImages[this.imgTCleff], 0, -10 + this.staffPos * this.lineWidth, 85, 85);
+     this.ctx.drawImage(this.loadedImages[this.imgBCleff],18, 100 + this.staffPos * this.lineWidth,42,42);
+     this.drawQuarterNote(0,0);
+   }
 
    //add drawNewOuterNote
 
