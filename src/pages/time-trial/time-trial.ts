@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PianoDrawProvider } from '../../providers/piano-draw/piano-draw';
+import { Storage } from '@ionic/storage';
 
 
 @IonicPage()
@@ -18,27 +19,36 @@ export class TimeTrialPage {
   public intervalId = 0;
   public seconds = 4;
   public timeLeft = "30";
+  public timer:any;
+  public currentUser:string;
+  public users:Array<any>;
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public drawServ: PianoDrawProvider) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public drawServ: PianoDrawProvider, private storage: Storage) {
+    this.storage.get("currentUser").then((val)=>{
+      this.currentUser = val;
+    });
+    console.log(this.currentUser);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BassPage');
 
+    this.storage.get("currentUser").then((val)=>{
+      this.currentUser = val;
+      console.log(this.currentUser);
+    });
     this.clef = Math.floor(Math.random() * 2);
     this.drawServ.outerPos = true;
   	this.canvasElement.nativeElement.width = 320;
     this.canvasElement.nativeElement.height = 260;
     this.ctx = this.canvasElement.nativeElement.getContext('2d');
     this.drawServ.clearCanvas();
-    //this.ctx.drawImage(this.drawServ.canvas, 0, 0);
-    //this.drawServ.clearCanvas();
     this.drawServ.drawGrandStaff();
-    //this.drawServ.drawRandomNote(this.clef);
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
+    this.storage.get("users").then((val)=>{
+      this.users = JSON.parse(val);
+    });
 
   }
 
@@ -78,7 +88,72 @@ export class TimeTrialPage {
     this.incorrectClicks = this.incorrectClicksNum.toString();
   }
 
-  clearTimer() { clearInterval(this.intervalId); }
+  storeResults(){
+    let currentUserIndex = this.findUserIndex(this.currentUser);
+    if(currentUserIndex < 0){
+      alert("failed to find user!");
+    }
+    else if(this.users[currentUserIndex].correctNotes[0] < 0){
+      this.users[currentUserIndex].correctNotes[0] = this.correctClicksNum;
+      this.users[currentUserIndex].incorrectNotes[0] = this.incorrectClicksNum;
+      this.storage.set("users", JSON.stringify(this.users));
+    }
+    else{
+      this.users[currentUserIndex].correctNotes.push(this.correctClicksNum);
+      this.users[currentUserIndex].incorrectNotes.push(this.incorrectClicksNum);
+      this.storage.set("users", JSON.stringify(this.users));
+    }
+    console.log(JSON.stringify(this.users[currentUserIndex]));
+  }
+
+  findUserIndex(user:string):number{
+    let index = this.users.length;
+    for(let i = 0; i < index; i++){
+      if(this.users[i].username === user){
+        return i;
+      }
+    }
+    return -1;
+
+  }
+
+ /* displayTimeChange(seconds:number){
+    console.log("timer working");
+    seconds--;
+    _this.timeLeft = this.seconds.toString();
+    if(_this.seconds <= 0){
+        clearInterval(_this.timer);
+        _this.timeStarted = false;
+      }
+  }*/
+
+  resetTimer(){
+    document.getElementById('timeLeft').innerHTML = "30";
+    this.timeStarted = false;
+    console.log("worked");
+  }
+
+  startTimer(timeLength:number){
+    this.timeStarted = true;
+    this.drawServ.drawRandomNote(this.clef);
+    this.ctx.drawImage(this.drawServ.canvas, 0, 0);
+    let secondsLeft = timeLength;
+    let timerRunning = true;
+    let timer = setInterval(function(){
+      secondsLeft--;
+      document.getElementById('timeLeft').innerHTML = secondsLeft.toString();
+      if(secondsLeft <= 0){
+        timerRunning = false;
+        clearInterval(timer);
+        document.getElementById('timeLeft').innerHTML = "30";
+      }
+    },1000);
+  }
+
+
+}
+/*
+clearTimer() { clearInterval(this.intervalId); }
 
   //ngOnInit()    { this.start(); }
   ngOnDestroy() { this.clearTimer(); }
@@ -110,8 +185,6 @@ export class TimeTrialPage {
       }
     }, 1000);
     return 0;
-  }
-
-}
+  }*/
 
 

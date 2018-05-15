@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Users</ion-title>
+  </ion-navbar>
+  <BUTTON ion-button icon-only clear (click)="showAddUserModal()">
+      <ion-icon name="add"></ion-icon>
+  </BUTTON>
+</ion-header>
+
+
+<ion-content>
+  <p>Swipe right to change user, swipe left to delete user</p>
+	<ion-list>
+      <ion-item-sliding *ngFor="let user of users; index as i">
+        <ion-item>
+        	{{user.username}}
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="deleteUser(i)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+        <ion-item-options side="left">
+          <button ion-button (click)="setCurrentUser(i)">
+            <ion-icon name="contact"></ion-icon>
+          </button>
+        </ion-item-options>
+    </ion-item-sliding>
+    </ion-list>	
+
+    <button ion-button (click)="changeUser()">
+        <ion-icon name="trash"></ion-icon>
+    </button>
+
+
+</ion-content>

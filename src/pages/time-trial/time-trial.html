@@ -11,7 +11,7 @@
 
   <div class="timerDiv">
     
-    <div class="timerText">{{timeLeft}}</div>
+    <div id="timeLeft" class="timerText">30</div>
     
   </div>
   <div class="timerDiv">
@@ -24,7 +24,7 @@
   </canvas>
 
   <div>
-    <BUTTON ion-button (click)="start()">Start</BUTTON>
+    <BUTTON ion-button (click)="startTimer(30)">Start</BUTTON>
   </div>
 
 
@@ -36,6 +36,7 @@
   <BUTTON ion-button (click)="drawRandIfCorrect(5)">F</BUTTON>  
   <BUTTON ion-button (click)="drawRandIfCorrect(6)">G</BUTTON>
 
+  <button ion-button color="pianoButtonColor" block (click)="storeResults()">Save results</button>
   <button ion-button color="pianoButtonColor" block (click)="popPage()">Back To Home</button>
 
 </ion-content>

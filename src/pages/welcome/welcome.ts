@@ -25,7 +25,6 @@ export class WelcomePage {
   submitUserName(){
   	this.userName = this.inputName;
   	console.log(this.userName);
-  	//this.navCtrl.push(HomePage, {userName: this.userName});
   	this.viewCtrl.dismiss({userName: this.userName});
   }
 

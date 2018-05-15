@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../pages/home/home';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -11,6 +12,8 @@ import { GrandStaffPage } from '../pages/grand-staff/grand-staff';
 import { TimeTrialPage } from '../pages/time-trial/time-trial';
 import { StatsPage } from '../pages/stats/stats';
 import { WelcomePage } from '../pages/welcome/welcome';
+//import { UsersPage } from '../pages/users/users';
+//import { AddUserPage } from '../pages/add-user/add-user';
 
 
 @Component({
@@ -23,10 +26,10 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    //this is the sidebar list 
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Tutorial', component: TutorialPage},
@@ -34,8 +37,7 @@ export class MyApp {
       { title: 'Bass', component: BassPage},
       { title: 'Grand Staff', component: GrandStaffPage},
       { title: 'Time Trial', component: TimeTrialPage},
-      { title: 'Stats', component: StatsPage},
-      { title: 'Welcome', component: WelcomePage}
+      { title: 'Stats', component: StatsPage}
 
     ];
 
@@ -45,6 +47,11 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      /*this.storage.get("userFound").then((val) => {
+        if (val === null) {
+          this.storage.set("userFound", 0);
+        }
+      });*/
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

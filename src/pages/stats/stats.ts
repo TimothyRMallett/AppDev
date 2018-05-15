@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { Chart } from 'chart.js';
 
 
 
@@ -10,20 +12,69 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StatsPage {
 
-	public timeTrialData:Array<any> = [
-  {data: [10, 15, 33, 37, 42, 51, 60, 61, 63, 57], label: 'Correct Notes'},
-  {data: [26, 23, 14, 17, 13, 11, 6, 8, 11, 4, 5], label: 'Incorrect Notes'}
-];
-public lineChartLabels:Array<any> = ['1', '2', '3', '4', '5', '6', '7', '8','9','10'];
-
-public lineChartType:string = 'line';
+public users:Array<any>;
+public currentUser:string;
+public currentUserData:any;
+public chartLabels = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('barChartCanvas')barCanvas;
+  barChart: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StatsPage');
+
+    this.storage.get("users").then((val)=>{
+      this.users = JSON.parse(val);
+      this.storage.get("currentUser").then((val)=>{
+        this.currentUser = val;
+        let userIndex = this.findUserIndex(this.currentUser);
+        this.currentUserData = this.users[userIndex];
+        this.createLabels(this.currentUserData.correctNotes.length);
+        this.barChart = new Chart(this.barCanvas.nativeElement, {
+          type: 'bar',
+          data: {
+            labels: this.chartLabels,
+            datasets:[{
+              label: 'Correct Notes',
+              data: this.currentUserData.correctNotes,
+              backgroundColor: [
+                //'rgba(255, 17, 100, 0.3)'
+               ]
+            },
+            {
+              label: 'Incorrect Notes',
+              data: this.currentUserData.incorrectNotes,
+              backgroundColor: [
+                //'rgba(255, 17, 100, 0.3)'
+               ]
+            }]
+           }
+          });
+      });
+    });
+
+
+  }
+
+  findUserIndex(user:string):number{
+    let index = this.users.length;
+    for(let i = 0; i < index; i++){
+      if(this.users[i].username === user){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  createLabels(arrLength:number){
+    for(let i = 1; i <= arrLength; i++){
+      this.chartLabels.push(i.toString());
+    }
+    console.log(JSON.stringify(this.chartLabels));
   }
 
 }

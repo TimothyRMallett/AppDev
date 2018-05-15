@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AddUser</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-item>
+		<ion-input type="text"[(ngModel)]="username" placeholder="Username"></ion-input>
+	</ion-item>
+
+    <button ion-button color="pianoButtonColor" block (click)="addUser()">Submit</button>	
+
+</ion-content>
