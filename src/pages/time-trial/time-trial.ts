@@ -29,7 +29,7 @@ export class TimeTrialPage {
     this.storage.get("currentUser").then((val)=>{
       this.currentUser = val;
     });
-    console.log(this.currentUser);
+    console.log(this.currentUser + "is the current user!");
   }
 
   ionViewDidLoad() {
@@ -89,8 +89,11 @@ export class TimeTrialPage {
   }
 
   storeResults(){
+    console.log(JSON.stringify(this.users));
     let currentUserIndex = this.findUserIndex(this.currentUser);
+    console.log(currentUserIndex + JSON.stringify(this.users[currentUserIndex]));
     if(currentUserIndex < 0){
+      console.log("failed to find user!");
       alert("failed to find user!");
     }
     else if(this.users[currentUserIndex].correctNotes[0] < 0){
@@ -107,8 +110,9 @@ export class TimeTrialPage {
   }
 
   findUserIndex(user:string):number{
-    let index = this.users.length;
-    for(let i = 0; i < index; i++){
+    let length = this.users.length;
+    console.log(length);
+    for(let i = 0; i < length; i++){
       if(this.users[i].username === user){
         return i;
       }
@@ -139,11 +143,13 @@ export class TimeTrialPage {
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
     let secondsLeft = timeLength;
     let timerRunning = true;
+    let self = this;
     let timer = setInterval(function(){
       secondsLeft--;
       document.getElementById('timeLeft').innerHTML = secondsLeft.toString();
       if(secondsLeft <= 0){
-        timerRunning = false;
+        self.timeStarted = false;
+        console.log(self.timeStarted);
         clearInterval(timer);
         document.getElementById('timeLeft').innerHTML = "30";
       }

@@ -80,10 +80,10 @@ export class HomePage {
   			//this.users[this.usersFound] = {username:data.userName,}
   			this.storage.get("users").then((val)=>{
   				if(val === null){
-  					let correct = JSON.stringify(this.correctNotes);
-  					let incorrect = JSON.stringify(this.incorrectNotes);
+  					let correct = this.correctNotes;
+  					let incorrect = this.incorrectNotes;
   					let usersArr = [{username:data.userName, correctNotes:correct, incorrectNotes:incorrect}];
-        			this.storage.set("users", JSON.stringify(usersArr));
+        		this.storage.set("users", JSON.stringify(usersArr));
         		}
       		});
       		this.storage.get("currentUser").then((val)=>{
