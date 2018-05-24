@@ -17,7 +17,8 @@ export class TimeTrialPage {
   public incorrectClicks = "0"; public incorrectClicksNum = 0;
   public timeStarted = false;
   public intervalId = 0;
-  public seconds = 4;
+  public setTime = 6;
+  public seconds = this.setTime;
   public timeLeft = "30";
   public timer:any;
   public currentUser:string;
@@ -79,13 +80,31 @@ export class TimeTrialPage {
   }
 
   incrementCorrect(){
-    this.correctClicksNum++;
-    this.correctClicks = this.correctClicksNum.toString();
+    if(this.timeStarted){
+      this.correctClicksNum++;
+      this.correctClicks = this.correctClicksNum.toString();
+    }
   }
 
   incrementIncorrect(){
-    this.incorrectClicksNum++;
+    if(this.timeStarted){
+      this.incorrectClicksNum++;
+      this.incorrectClicks = this.incorrectClicksNum.toString();
+    }
+  }
+
+  resetClicks(){
+    this.incorrectClicksNum = 0;
     this.incorrectClicks = this.incorrectClicksNum.toString();
+    this.correctClicksNum = 0;
+    this.correctClicks = this.correctClicksNum.toString();
+  }
+
+  timeTrialDone(){
+    this.timeStarted = false;
+    this.storeResults();
+    this.resetClicks();
+    this.seconds = this.setTime;
   }
 
   storeResults(){
@@ -121,76 +140,20 @@ export class TimeTrialPage {
 
   }
 
- /* displayTimeChange(seconds:number){
-    console.log("timer working");
-    seconds--;
-    _this.timeLeft = this.seconds.toString();
-    if(_this.seconds <= 0){
-        clearInterval(_this.timer);
-        _this.timeStarted = false;
-      }
-  }*/
-
-  resetTimer(){
-    document.getElementById('timeLeft').innerHTML = "30";
-    this.timeStarted = false;
-    console.log("worked");
-  }
-
-  startTimer(timeLength:number){
+  startTimer(){
     this.timeStarted = true;
     this.drawServ.drawRandomNote(this.clef);
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
-    let secondsLeft = timeLength;
     let timerRunning = true;
     let self = this;
     let timer = setInterval(function(){
-      secondsLeft--;
-      document.getElementById('timeLeft').innerHTML = secondsLeft.toString();
-      if(secondsLeft <= 0){
-        self.timeStarted = false;
-        console.log(self.timeStarted);
+      self.seconds--;
+      if(self.seconds <= 0){
+        self.timeTrialDone();
         clearInterval(timer);
-        document.getElementById('timeLeft').innerHTML = "30";
       }
     },1000);
   }
 
 
 }
-/*
-clearTimer() { clearInterval(this.intervalId); }
-
-  //ngOnInit()    { this.start(); }
-  ngOnDestroy() { this.clearTimer(); }
-
-  start(){ 
-    if(this.timeStarted){
-      
-    }
-    else{
-      this.timeStarted = true;
-      this.drawServ.drawRandomNote(this.clef);
-      this.ctx.drawImage(this.drawServ.canvas, 0, 0);
-      this.countDown(); 
-    }
-  }
-  stop()  {
-    this.clearTimer();
-  }
-
-  private countDown() : number {
-    this.clearTimer();
-    this.intervalId = window.setInterval(() => {
-      this.seconds--;
-      this.timeLeft = this.seconds.toString();
-      if (this.seconds <= 0) {
-        this.seconds = 30;
-        stop();
-        return 1;
-      }
-    }, 1000);
-    return 0;
-  }*/
-
-
