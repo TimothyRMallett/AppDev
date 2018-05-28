@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle color="pianoButtonColor">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <BUTTON ion-button icon-only clear (click)="showChangeUserModal()">
+    <BUTTON ion-button color="pianoButtonColor" icon-only clear (click)="showChangeUserModal()">
       <ion-icon name="contacts"></ion-icon>
     </BUTTON>
     <ion-title>Home</ion-title>
@@ -16,28 +16,28 @@
   <p class= "sub-Heading">Welcome {{userName}}!</p>
 
   <p class="sub-Heading">Learn to read sheet music FAST!</p>
-<!--
-  <button ion-button secondary menuToggle>Toggle Menu</button>
--->
-<div class="buttonDiv">
 
-  <button ion-button color="pianoButtonColor" block (click)="pushPage('Tutorial')">Tutorial</button>
-  <button ion-button color="pianoButtonColor" block (click)="pushPage('Treble')">Treble Clef</button>
-  <button ion-button color="pianoButtonColor" block (click)="pushPage('Bass')">Bass Clef</button>
-  <button ion-button color="pianoButtonColor" block (click)="pushPage('Grand')">Grand Staff</button>
-  <button ion-button color="pianoButtonColor" block (click)="pushPage('Time')">Time Trial</button>
-  <button ion-button color="pianoButtonColor" block (click)="pushPage('Stats')">Stats</button>
-  
+  <div class="buttonDiv">
+    <button ion-button color="pianoButtonColor" block (click)="pushPage('Tutorial')">Tutorial</button>
+    <button ion-button color="pianoButtonColor" block (click)="pushPage('Treble')">Treble Clef</button>
+    <button ion-button color="pianoButtonColor" block (click)="pushPage('Bass')">Bass Clef</button>
+    <button ion-button color="pianoButtonColor" block (click)="pushPage('Grand')">Grand Staff</button>
+    <button ion-button color="pianoButtonColor" block (click)="pushPage('Time')">Time Trial</button>
+    <button ion-button color="pianoButtonColor" block (click)="pushPage('Stats')">Stats</button>
+  </div>
 
-</div>
+  <ion-item>
+      <ion-label>Practice Reminder</ion-label>
+      <ion-datetime displayFormat="HH:mm DD/MM/YYYY"[(ngModel)]="reminder"></ion-datetime>
+  </ion-item>
 
-<div class="loadImgDiv">
-  <canvas #canvas class="grandStaffCanvas">
-  </canvas>
-</div>
+    <p>Current Number : {{numberString}}<p>
 
+    <img src={{image}}>
 
-
-  
+  <div class="loadImgDiv">
+    <canvas #canvas class="grandStaffCanvas">
+    </canvas>
+  </div>
 
 </ion-content>

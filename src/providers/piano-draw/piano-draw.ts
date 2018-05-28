@@ -122,6 +122,7 @@ export class PianoDrawProvider {
    }
    //redraws whole grandstaff
    redrawCanvas(){
+    this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
    	this.clearCanvas();
    	this.setupCanvas();
    	this.drawGrandStaff();

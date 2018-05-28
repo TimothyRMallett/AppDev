@@ -17,7 +17,7 @@ export class TimeTrialPage {
   public incorrectClicks = "0"; public incorrectClicksNum = 0;
   public timeStarted = false;
   public intervalId = 0;
-  public setTime = 6;
+  public setTime = 3;
   public seconds = this.setTime;
   public timeLeft = "30";
   public timer:any;
@@ -101,10 +101,16 @@ export class TimeTrialPage {
   }
 
   timeTrialDone(){
+    this.drawServ.redrawCanvas();
+    this.ctx.drawImage(this.drawServ.canvas, 0, 0);
+    console.log("whydis");
     this.timeStarted = false;
     this.storeResults();
     this.resetClicks();
     this.seconds = this.setTime;
+    this.drawServ.clearCanvas();
+    this.drawServ.drawGrandStaff();
+    this.ctx.drawImage(this.drawServ.canvas, 0, 0);
   }
 
   storeResults(){
@@ -137,23 +143,30 @@ export class TimeTrialPage {
       }
     }
     return -1;
-
   }
 
   startTimer(){
-    this.timeStarted = true;
-    this.drawServ.drawRandomNote(this.clef);
-    this.ctx.drawImage(this.drawServ.canvas, 0, 0);
-    let timerRunning = true;
-    let self = this;
-    let timer = setInterval(function(){
-      self.seconds--;
-      if(self.seconds <= 0){
-        self.timeTrialDone();
-        clearInterval(timer);
-      }
-    },1000);
+    if(this.timeStarted){}
+    else{
+      this.drawServ.redrawCanvas();
+      this.ctx.clearRect(0,0, this.canvasElement.nativeElement.width, this.canvasElement.nativeElement.height);
+      this.ctx.drawImage(this.drawServ.canvas, 0, 0);
+      this.clef = Math.floor(Math.random() * 2);
+      this.timeStarted = true;
+      this.drawServ.drawRandomNote(this.clef);
+      //this.drawServ.clearCanvas();
+      this.ctx.drawImage(this.drawServ.canvas, 0, 0);
+      let timerRunning = true;
+      let self = this;
+      let timer = setInterval(function(){
+        self.seconds--;
+        if(self.seconds <= 0){
+          self.ctx.clearRect(0,0, self.canvasElement.nativeElement.width, self.canvasElement.nativeElement.height);
+          self.timeTrialDone();
+          clearInterval(timer);
+        }
+      },1000);
+    }
   }
-
 
 }

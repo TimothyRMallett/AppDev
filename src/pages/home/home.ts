@@ -26,8 +26,13 @@ export class HomePage {
 	public users:Array<any>;
 	public correctNotes:Array<number> = [-1];
 	public incorrectNotes:Array<number> = [-1];
+  public reminder: string;
+  public numberInput = 0;
+  public numberString = "b";
+  public image: any;
 	@ViewChild('canvas') canvasElement: ElementRef;
-  	private ctx: any;
+  private ctx: any;
+
 
   	constructor(public navCtrl: NavController, public modCtrl: ModalController, public navParams: NavParams, public drawServ: PianoDrawProvider, private storage: Storage) {
 
@@ -43,6 +48,16 @@ export class HomePage {
   			this.userName = val;
   		});
   	}
+    ionViewDidEnter(){
+    this.storage.get("image").then((val)=>{
+      if(val === null){
+        console.log("no Image uploaded");
+      }
+      else{
+        this.image = val;
+      }
+    });
+  }
 
   	ionViewDidLoad(){
   		
@@ -75,9 +90,6 @@ export class HomePage {
   		let userModal = this.modCtrl.create(WelcomePage);
   		userModal.onDidDismiss(data => {
   			this.userName = data.userName;
-  			//this.usersFound++;
-  			//this.storage.set("userFound", this.usersFound);
-  			//this.users[this.usersFound] = {username:data.userName,}
   			this.storage.get("users").then((val)=>{
   				if(val === null){
   					let correct = this.correctNotes;
@@ -99,15 +111,21 @@ export class HomePage {
   	showChangeUserModal(index:number){
   		let usersModal = this.modCtrl.create(UsersPage);
   		usersModal.onDidDismiss(data => {
-          this.userName = data.currentUser;
+        this.userName = data.currentUser;
+        this.reminder = data.reminder;
+        this.numberInput = data.numberInput;
+        console.log(this.numberInput);
+        this.numberString = this.numberInput.toString();
+        this.storage.get("image").then((val)=>{
+            if(val === null){
+              console.log("no Image uploaded");
+            }
+            else{
+              this.image = val;
+            }
+          });
   		});
   		usersModal.present();
-  		/*
-  		this.storage.get("users").then((val)=>{
-  			let usersArr = JSON.parse(val);
-  			this.userName = usersArr[index].username;
-  			this.storage.set("currentUser", usersArr[index].username);
-  		});*/
   	}
 
 }

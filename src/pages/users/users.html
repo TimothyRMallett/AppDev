@@ -3,17 +3,13 @@
   <ion-navbar>
     <ion-title>Users</ion-title>
   </ion-navbar>
-  <BUTTON ion-button icon-only clear (click)="showAddUserModal()">
-      <ion-icon name="add"></ion-icon>
-  </BUTTON>
 </ion-header>
 
-
 <ion-content>
-  <p>Swipe right to change user, swipe left to delete user</p>
+  <p class="username">Current User is {{currentUser}}</p>
 	<ion-list>
       <ion-item-sliding *ngFor="let user of users; index as i">
-        <ion-item>
+        <ion-item class="listItemColor">
         	{{user.username}}
         </ion-item>
         <ion-item-options side="right">
@@ -27,11 +23,27 @@
           </button>
         </ion-item-options>
     </ion-item-sliding>
-    </ion-list>	
+  </ion-list>	
 
-    <button ion-button (click)="changeUser()">
-        <ion-icon name="trash"></ion-icon>
-    </button>
+  <BUTTON ion-button color="pianoButtonColor" (click)="showAddUserModal()">
+    <ion-icon name="add"></ion-icon>
+  </BUTTON>
 
+  <ion-item>
+    <ion-label>Practice Reminder</ion-label>
+    <ion-datetime displayFormat="HH:mm DD/MM/YYYY"[(ngModel)]="reminder"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Save Number</ion-label>
+    <ion-input type="number" min="0" max="1000" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="numberInput"></ion-input>
+  </ion-item>
+
+  <input #fileInput type="file" accept="image/*" (change)="imageSelected(fileInput.files)"/>
+  <img src={{imgFile}}>
+
+  <button ion-button color="pianoButtonColor" (click)="changeUser()">
+      Back to Home
+  </button>
 
 </ion-content>
