@@ -37,11 +37,11 @@ export class UsersPage {
     console.log('ionViewDidLoad UsersPage');
   }
 
-  changeUser(){
+  changeUser(){ //called by back button to go back to home screen and return inputs
   	this.viewctrl.dismiss({currentUser:this.currentUser, reminder:this.reminder, numberInput: this.numberInput});
   }
 
-  showAddUserModal(){
+  showAddUserModal(){//Displays the add user modal to add a new user and stores data returned and adds to list
     let usersModal = this.modCtrl.create(AddUserPage);
       usersModal.onDidDismiss(data => { 
         this.username = data.username;
@@ -52,7 +52,7 @@ export class UsersPage {
       usersModal.present();
   }
 
-  deleteUser(index:number){
+  deleteUser(index:number){ //Deletes user from list and makes checks to avoid errors
     if(this.users.length > 1){
       if(confirm("Delete " + this.users[index].username + "?")){
         if(this.users[index].username === this.currentUser){
@@ -72,18 +72,18 @@ export class UsersPage {
     }
   }
 
-  editUsername(index:number){
+  editUsername(index:number){//not used or implemented
 
   }
 
-  setCurrentUser(index:number){
+  setCurrentUser(index:number){//sets the current
     this.storage.set("currentUser",this.users[index].username);
     this.currentUser = this.users[index].username;
     console.log(this.currentUser);
     console.log(this.numberInput);
   }
 
-  imageSelected(files){
+  imageSelected(files){//allows user to select image from device when clicked and displays it
     
     let fileReader = new FileReader();
 

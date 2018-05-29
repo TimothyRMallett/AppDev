@@ -22,7 +22,7 @@ export class WelcomePage {
     console.log('ionViewDidLoad WelcomePage');
   }
 
-  submitUserName(){
+  submitUserName(){// Sends username to home to be stored and set as current user
   	this.userName = this.inputName;
   	console.log(this.userName);
   	this.viewCtrl.dismiss({userName: this.userName});

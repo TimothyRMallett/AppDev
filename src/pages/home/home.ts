@@ -48,7 +48,7 @@ export class HomePage {
   			this.userName = val;
   		});
   	}
-    ionViewDidEnter(){
+    ionViewDidEnter(){//Used to display image when entering page
     this.storage.get("image").then((val)=>{
       if(val === null){
         console.log("no Image uploaded");
@@ -86,7 +86,7 @@ export class HomePage {
 		}
 	}
 
-	showUserModal(){
+	showUserModal(){//displays the welcome modal if their is no stored user
   		let userModal = this.modCtrl.create(WelcomePage);
   		userModal.onDidDismiss(data => {
   			this.userName = data.userName;
@@ -108,7 +108,7 @@ export class HomePage {
   		userModal.present();
   	}
 
-  	showChangeUserModal(index:number){
+  	showChangeUserModal(index:number){//displays the user modal and handles and displays data returned
   		let usersModal = this.modCtrl.create(UsersPage);
   		usersModal.onDidDismiss(data => {
         this.userName = data.currentUser;

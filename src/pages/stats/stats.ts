@@ -60,7 +60,7 @@ public chartLabels = [];
 
   }
 
-  findUserIndex(user:string):number{
+  findUserIndex(user:string):number{ //finds index in array of current user for display their results
     let index = this.users.length;
     for(let i = 0; i < index; i++){
       if(this.users[i].username === user){
@@ -70,7 +70,7 @@ public chartLabels = [];
     return -1;
   }
 
-  createLabels(arrLength:number){
+  createLabels(arrLength:number){//creates the lables for the chart to scale it no matter how many time trial attempts
     for(let i = 1; i <= arrLength; i++){
       this.chartLabels.push(i.toString());
     }

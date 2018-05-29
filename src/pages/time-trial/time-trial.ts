@@ -79,27 +79,29 @@ export class TimeTrialPage {
     this.navCtrl.pop();
   }
 
-  incrementCorrect(){
+  incrementCorrect(){ //add one to correct clicks if time has started
     if(this.timeStarted){
       this.correctClicksNum++;
       this.correctClicks = this.correctClicksNum.toString();
     }
   }
 
-  incrementIncorrect(){
+  incrementIncorrect(){ //add one to incorrect clicks if time has started
     if(this.timeStarted){
       this.incorrectClicksNum++;
       this.incorrectClicks = this.incorrectClicksNum.toString();
     }
   }
 
-  resetClicks(){
+  resetClicks(){ //sets clicks to zero and displays them as so
     this.incorrectClicksNum = 0;
     this.incorrectClicks = this.incorrectClicksNum.toString();
     this.correctClicksNum = 0;
     this.correctClicks = this.correctClicksNum.toString();
   }
 
+//When the time trial is done this is called to reset everything to original state so a new time trial can start
+//This is the only function called at the end of the timer and requires all jobs to be done inside it
   timeTrialDone(){
     this.drawServ.redrawCanvas();
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
@@ -113,7 +115,7 @@ export class TimeTrialPage {
     this.ctx.drawImage(this.drawServ.canvas, 0, 0);
   }
 
-  storeResults(){
+  storeResults(){//stores results of time trial in memory
     console.log(JSON.stringify(this.users));
     let currentUserIndex = this.findUserIndex(this.currentUser);
     console.log(currentUserIndex + JSON.stringify(this.users[currentUserIndex]));
@@ -134,7 +136,7 @@ export class TimeTrialPage {
     console.log(JSON.stringify(this.users[currentUserIndex]));
   }
 
-  findUserIndex(user:string):number{
+  findUserIndex(user:string):number{//Finds the index in the array of the current user for storing the results
     let length = this.users.length;
     console.log(length);
     for(let i = 0; i < length; i++){
@@ -145,7 +147,7 @@ export class TimeTrialPage {
     return -1;
   }
 
-  startTimer(){
+  startTimer(){//starts the timer and handles the countdown and display of clicks and resets when done
     if(this.timeStarted){}
     else{
       this.drawServ.redrawCanvas();

@@ -18,7 +18,7 @@ export class AddUserPage {
     console.log('ionViewDidLoad AddUserPage');
   }
 
-  addUser(){
+  addUser(){//Called by add user button to send the username back to then user page
   	this.viewctrl.dismiss({username: this.username});
   }
 
