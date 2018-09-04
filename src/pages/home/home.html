@@ -26,15 +26,6 @@
     <button ion-button color="pianoButtonColor" block (click)="pushPage('Stats')">Stats</button>
   </div>
 
-  <ion-item>
-      <ion-label>Practice Reminder</ion-label>
-      <ion-datetime displayFormat="HH:mm DD/MM/YYYY"[(ngModel)]="reminder"></ion-datetime>
-  </ion-item>
-
-    <p>Current Number : {{numberString}}<p>
-
-    <img src={{image}}>
-
   <div class="loadImgDiv">
     <canvas #canvas class="grandStaffCanvas">
     </canvas>

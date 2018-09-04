@@ -29,19 +29,6 @@
     <ion-icon name="add"></ion-icon>
   </BUTTON>
 
-  <ion-item>
-    <ion-label>Practice Reminder</ion-label>
-    <ion-datetime displayFormat="HH:mm DD/MM/YYYY"[(ngModel)]="reminder"></ion-datetime>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Save Number</ion-label>
-    <ion-input type="number" min="0" max="1000" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="numberInput"></ion-input>
-  </ion-item>
-
-  <input #fileInput type="file" accept="image/*" (change)="imageSelected(fileInput.files)"/>
-  <img src={{imgFile}}>
-
   <button ion-button color="pianoButtonColor" (click)="changeUser()">
       Back to Home
   </button>

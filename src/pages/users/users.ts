@@ -13,15 +13,12 @@ import { AddUserPage } from '../add-user/add-user';
 export class UsersPage {
 
   @ViewChild('fileInput')fileInput;
-  imgFile: any;
 
 	public users: Array<any>;
   public username: string;
   public corArr:Array<number> = [-1];
   public incorArr:Array<number> = [-1];
   public currentUser: string;
-  public reminder = "";
-  public numberInput = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewctrl: ViewController,public modCtrl: ModalController, private storage: Storage) {
   	this.storage.get("users").then((val)=>{
@@ -38,7 +35,7 @@ export class UsersPage {
   }
 
   changeUser(){ //called by back button to go back to home screen and return inputs
-  	this.viewctrl.dismiss({currentUser:this.currentUser, reminder:this.reminder, numberInput: this.numberInput});
+  	this.viewctrl.dismiss({currentUser:this.currentUser});
   }
 
   showAddUserModal(){//Displays the add user modal to add a new user and stores data returned and adds to list
@@ -80,10 +77,9 @@ export class UsersPage {
     this.storage.set("currentUser",this.users[index].username);
     this.currentUser = this.users[index].username;
     console.log(this.currentUser);
-    console.log(this.numberInput);
   }
 
-  imageSelected(files){//allows user to select image from device when clicked and displays it
+/*  imageSelected(files){//allows user to select image from device when clicked and displays it
     
     let fileReader = new FileReader();
 
@@ -95,5 +91,6 @@ export class UsersPage {
     fileReader.readAsDataURL(files[0]);
 
   }
+*/
 
 }

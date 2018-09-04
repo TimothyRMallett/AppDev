@@ -25,9 +25,9 @@ export class PianoDrawProvider {
 	//private anote = 0; private bnote = 1; private cnote = 2; private dnote = 3; private enote = 4; private fnote = 5; private gnote = 6;
   
   //for attempting to load the images without refreshing
-  private pianoImages = ['../../assets/imgs/treble-clef.png' //this stores the local images
-                    ,'../../assets/imgs/bass-clef.png'
-                    ,'../../assets/imgs/quarter-note.png'
+  private pianoImages = ['https://d30y9cdsu7xlg0.cloudfront.net/png/923017-200.png' //this stores the local images
+                    ,'https://cdn.pixabay.com/photo/2013/07/12/12/30/bass-145826_960_720.png'
+                    ,'https://images.vexels.com/media/users/3/143592/isolated/preview/87a7de8e3d9f7b1760a9f5453b72b55c-quarter-note-isolated-by-vexels.png'
                     ];
   public loadedImages = {}; //holds the images when the are generated into an HTML Image Element
   public imgCount = this.pianoImages.length;

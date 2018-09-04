@@ -26,10 +26,6 @@ export class HomePage {
 	public users:Array<any>;
 	public correctNotes:Array<number> = [-1];
 	public incorrectNotes:Array<number> = [-1];
-  public reminder: string;
-  public numberInput = 0;
-  public numberString = "b";
-  public image: any;
 	@ViewChild('canvas') canvasElement: ElementRef;
   private ctx: any;
 
@@ -48,16 +44,6 @@ export class HomePage {
   			this.userName = val;
   		});
   	}
-    ionViewDidEnter(){//Used to display image when entering page
-    this.storage.get("image").then((val)=>{
-      if(val === null){
-        console.log("no Image uploaded");
-      }
-      else{
-        this.image = val;
-      }
-    });
-  }
 
   	ionViewDidLoad(){
   		
@@ -112,18 +98,6 @@ export class HomePage {
   		let usersModal = this.modCtrl.create(UsersPage);
   		usersModal.onDidDismiss(data => {
         this.userName = data.currentUser;
-        this.reminder = data.reminder;
-        this.numberInput = data.numberInput;
-        console.log(this.numberInput);
-        this.numberString = this.numberInput.toString();
-        this.storage.get("image").then((val)=>{
-            if(val === null){
-              console.log("no Image uploaded");
-            }
-            else{
-              this.image = val;
-            }
-          });
   		});
   		usersModal.present();
   	}
